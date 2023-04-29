@@ -1,0 +1,202 @@
+\documentclass[11pt]{article}
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage[dvipsnames]{xcolor}
+
+\begin{document}
+
+\noindent\fbox{%
+    \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+    $$\mbox{\Large \textbf {CS 111 (S23): Homework 2}}$$
+    $$\mbox{\textbf {Due Monday, April 17th by 11:59 PM}}$$ 
+    }%
+}
+$$\mbox{\textbf {NAME and PERM ID No.:} Justin Lang 5505771}$$
+$$\mbox{\textbf {UCSB EMAIL:} jlang61@ucsb.edu (replace with yours)}$$
+$$\mbox{\textbf {Homework Buddy:} Andrew Chiang}$$
+
+\medskip
+\noindent\fbox{%
+    \parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule}{%
+\textbf{Additional Instructions}: Please enter the LaTeX command \textit{\textbackslash newpage} at the end of each of your answers in your LaTeX source code. This will put each answer on at least one page and make it easier to grade on Gradescope.
+    } %
+}
+
+\bigskip
+\begin{enumerate}
+
+\item
+\textit{(15 pts)} The following three statements are all {\bf false}. For each one, 
+give a counterexample consisting of a 3-by-3 matrix or matrices (to show that they are indeed false), 
+and show the Python computation that proves that the statement fails (i.e. a copy of the actual code and also the aftermath of its execution - please do not put screenshots here). 
+
+A good way to solve this problem (other than thinking about Linear Algebra theories) can start with trial-and-error computations on Python: you should get comfortable with this language and environment, which in turn will help with your intuitive thinking about these sorts of problems.
+
+\begin{itemize}
+\item
+If $P$ is a permutation matrix and $A$ is any matrix, then $PA=AP$.
+
+\item
+A symmetrical, non-singular matrix $M$ with a negative determinate is also a symmetrical positive-definite (SPD) matrix.
+
+\item
+The product of two symmetrical matrices is a symmetrical matrix.
+\end{itemize}
+
+\begin{enumerate}
+    \item A counterexample that proves $PA = AP$ false can be a simple combination of matrix where.
+    \begin{align*}
+        A &=
+        \begin{pmatrix}
+        0 & 1 & 0 \\ 
+        1 & 0 & 0 \\
+        0 & 0 & 1 \\ 
+        \end{pmatrix}
+        & 
+        P &= 
+        \begin{pmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            7 & 8 & 9 \\
+        \end{pmatrix}
+    \end{align*}\\
+    First we start by finding out what the left side of the equation would equate to, and then calculate the right side of the equation to prove that they are not equal\\
+    LHS:\\
+    \begin{align*}
+        PA &= 
+        \begin{pmatrix}
+        0 & 1 & 0 \\ 
+        1 & 0 & 0 \\
+        0 & 0 & 1 \\ 
+        \end{pmatrix}
+        * 
+        \begin{pmatrix}
+            1 & 2 & 3 \\
+            4 & 5 & 6 \\
+            7 & 8 & 9 \\
+        \end{pmatrix}
+        & \text{Setting up equation}\\
+        &= 
+        \begin{pmatrix}
+            0*1 + 1*4 + 0*7 \\ 
+            1*2 + 0*5 + 0*8 \\
+            0*3 + 0*6 + 1*9 \\ 
+        \end{pmatrix}
+        & \text{calculating values of multiplied matrix}
+    \end{align*}
+\end{enumerate}
+\newpage
+\medskip
+\item
+\textit{(10 pts)} 
+By refering to a generic 3x3 matrix $M$ (that is, a generalized 3x3 matrix, not a specific one with actual values), prove that $M + M^T$ is always a symmetrical matrix.
+\begin{enumerate}
+    \item We start with an arbitrary 3x3 matrix such that if this statement, $M + M^T$, is proved for an arbitrary 3x3 matrix, then it applies to all and any matrix.
+    \begin{align*}
+        &  \text{if} & 
+        M &= 
+        \begin{pmatrix}
+            a & b & c \\
+            d & e & f \\
+            g & h & i \\
+        \end{pmatrix}
+        &  & \text{then}
+        & M^T &= 
+        \begin{pmatrix}
+            a & d & g \\
+            b & e & h \\
+            c & f & i \\
+        \end{pmatrix}
+    \end{align*}
+    $M^T$ was calculated by swapping every value at index (i,j) to their new index of (j,i). Since no change would occur if $i = j$, the changes were only required for $b,c,d,g,h,f$.\\
+    Now, we proceed by applying the statement $M + M^T$ to the matrices calculated above. \\
+    \begin{align*}
+        M + M^T &= 
+        \begin{pmatrix}
+            a & b & c \\
+            d & e & f \\
+            g & h & i \\
+        \end{pmatrix}
+        + 
+        \begin{pmatrix}
+            a & d & g \\
+            b & e & h \\
+            c & f & i \\
+        \end{pmatrix}
+        & \text{Setting up equation} \\
+        &= 
+        \begin{pmatrix}
+            a + a & b + d & c + g \\
+            d + b & e + e & f + h \\
+            g + c & h + f & i + i \\
+        \end{pmatrix}
+        & \text{Adding value at each index} \\
+        &= 
+        \begin{pmatrix}
+            a + a & b + d & c + g \\
+            b + d & e + e & f + h \\
+            c + g & f + h & i + i \\
+        \end{pmatrix}
+        & \text{Reordering variables} \\ 
+    \end{align*}
+    A matrix is called symmetric if for every value at index $(i,j)$, it is equal to the value at $(j,i)$. 
+    $M + M^T$ can be proved being symmetric by comparing every value at $(i,j)$ where $i \neq j$ because when $i = j$, $(j,i)$ gives same value at index $(i,j)$.  \\
+
+    At index $(0,1)$ compare to $(1,0)$, $b+d = b+d$ \\
+    At index $(0,2)$ compare to $(2,0)$, $c+g = c+g$ \\
+    At index $(1,2)$ compare to $(2,1)$, $f+h = f+h$ \\ 
+    
+    We have compared the indexes at all values where $i \neq j$ and shown that they are equal. Therefore, we have proved that $M + M^T$ is symmetrical. \\
+
+    
+\end{enumerate}
+\newpage
+\medskip
+\item
+\textit{(25 pts)} 
+Write the following matrix in the form $A=LU$, 
+where $L$ is a unit lower triangular matrix
+(that is, a lower triangular matrix with ones on the diagonal) 
+and $U$ is an upper triangular matrix. You can check your answer using Python, but for this exercise, you need to also show the steps you took to get to your answer with some explanation to go with them. In particular, if you have to use pivoting, then I need you to also tell me what the permutation matrix you used was.
+$$A =
+   \left(
+   \begin{array}{ccc}
+    5 & 3 & 3 \\ 	
+    3 & 5 & 3 \\ 
+   3 & 3 & 5 \\
+   \end{array} \right)
+$$
+
+\medskip
+\item
+\textit{(25 pts)} 
+Similar to the above exercise, write this matrix in the form $A=LU$. Again, you can check your answer using Python, but for this exercise, you need to also show the steps you took to get to your answer with some explanation to go with them. In particular, if you have to use pivoting, then I need you to also tell me what the permutation matrix you used was.
+
+$$A =
+   \left(
+   \begin{array}{ccc}
+    0 & 2 & 3 \\ 	
+    1 & 1 & 1 \\ 
+   -1 & 1 & 0 \\
+   \end{array} \right)
+$$
+
+\medskip
+\item
+\textit{(25 pts)} Write {\tt Usolve()}, analogous to {\tt Lsolve()} in the class lecture file {\tt lect04.ipynb} (this is the demo file used for \textbf{Lecture 4}), to solve an upper triangular system $Ux=y$. Your submission can just be the code for the \textit{function definition} of {\tt Usolve()}. 
+
+Obviously, you should also check your work beforehand - this is best done in the {\tt lect04.ipynb} file (provided for you in the same place you got these instructions). To best utilize this, you should run the .ipynb file on Jupyter Notebook.
+
+Important: Make sure that your {\tt Usolve()} function first checks to see that the input matrix $U$ is square, an upper triangular type, with nonzeros on the diagonal (unlike in {\tt Lsolve()}, the diagonal elements of $U$ don't have to be equal to one.)
+
+Test your function, both by itself and with {\tt LUsolve()}, and turn in the results (in other words, turn in the function AND show that the testing you did works).
+
+Hint: \textit{(You don't have to use this hint, but if you do, here it is...)} Loops can be run backward in Python, 
+say from $n-1$ down to $0$, by writing
+$$\mbox{\tt for i in reversed(range(n)):}$$
+
+\end{enumerate}
+
+\end{document}
